@@ -16,6 +16,10 @@ concurrency:
 permissions:
   contents: read
 
+# These are not secrets. The database below is a throwaway service container that
+# exists only for the life of one job and is never reachable from outside the runner.
+# Hard-coding them keeps the workflow readable and avoids teaching contributors to
+# reach for repository secrets where none are needed.
 env:
   POSTGRES_DB: otgp
   POSTGRES_USER: otgp
