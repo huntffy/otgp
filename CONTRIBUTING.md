@@ -65,6 +65,16 @@ migration, and add the table to `TENANT_SCOPED_TABLES` in `backend/app/models/__
 Autogenerate does not see RLS policies, triggers, grants, or partial-index predicates.
 Write those by hand and test them.
 
+Autogenerate *does* see every table on the `search_path`, including tables `CREATE
+EXTENSION` installed. `alembic/env.py` filters those out by asking `pg_depend` which
+relations an extension owns, rather than by matching names. This matters because the
+environments genuinely differ: the `postgis` image's own init scripts install
+`postgis_tiger_geocoder` (adding `county`, `tabblock`, `place_lookup` and ~50 more to the
+`search_path`), but our Compose file bind-mounts `/docker-entrypoint-initdb.d`, which
+*replaces* those scripts rather than adding to them. So a local database has no tiger
+tables and CI's does. Any hard-coded exclusion list is correct in one place and wrong in
+the other.
+
 ## Pull requests
 
 - One logical change per pull request.
