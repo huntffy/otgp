@@ -100,8 +100,18 @@ def run_migrations_online() -> None:
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
+
+    # Reflect extension-owned relations on a SEPARATE, fully-closed connection.
+    #
+    # In SQLAlchemy 2.0 the first execute on a connection begins a transaction. Running
+    # this query on the same connection that then runs the migration left that implicit
+    # transaction open ahead of alembic's own, and on connection close the uncommitted
+    # migration was rolled back — the DDL ran, exited 0, and persisted nothing. Isolating
+    # it here means it cannot touch the migration's transaction.
+    with connectable.connect() as inspect_conn:
+        _EXTENSION_OWNED.update(inspect_conn.scalars(EXTENSION_OWNED_QUERY))
+
     with connectable.connect() as connection:
-        _EXTENSION_OWNED.update(connection.scalars(EXTENSION_OWNED_QUERY))
         context.configure(
             connection=connection,
             target_metadata=target_metadata,
