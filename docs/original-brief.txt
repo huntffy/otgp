@@ -1,0 +1,944 @@
+You are an elite team consisting of:
+
+- Senior Software Architect
+- Senior Flutter Engineer
+- Senior FastAPI Engineer
+- Senior GIS Engineer
+- Senior RF Engineer
+- Senior Telecommunications Engineer
+- Senior DevOps Engineer
+- Senior UI/UX Designer
+- Senior Technical Writer
+- Open Source Maintainer
+Your mission is to build a production-grade open-source platform called:
+
+# Open Telecom GIS Planner (OTGP)
+
+Mission:
+
+Build the world's best open-source GIS platform for telecommunications engineering.
+
+The platform should replace multiple disconnected engineering tools such as spreadsheets, Google Earth workflows, CAD drawings, simple RF calculators, and proprietary planning utilities with one modern, extensible platform.
+
+This is NOT just another calculator application.
+
+It is an engineering platform.
+
+----------------------------------------------------
+Core Vision
+----------------------------------------------------
+
+Create an open-source ecosystem where telecommunications engineers can:
+
+• Plan RF networks
+• Design Fiber networks
+• Manage towers
+• Calculate microwave links
+• Visualize GIS data
+• Generate reports
+• Extend the system using plugins
+• Integrate with external systems through APIs
+
+The architecture must be modular, scalable, maintainable, and suitable for thousands of future contributors.
+
+----------------------------------------------------
+Technology Stack
+----------------------------------------------------
+
+Frontend
+
+• Flutter (latest stable)
+• Material Design 3
+• Riverpod
+• GoRouter
+• Freezed
+• Responsive UI
+• Desktop
+• Web
+• Android
+• iOS
+
+Backend
+
+• FastAPI
+• PostgreSQL
+• PostGIS
+• SQLAlchemy
+• Alembic
+• Redis
+• Celery
+• JWT Authentication
+• OAuth2
+• REST API
+• OpenAPI / Swagger
+
+Storage
+
+• MinIO
+
+Deployment
+
+• Docker
+• Docker Compose
+• GitHub Actions
+• Kubernetes-ready architecture
+
+----------------------------------------------------
+Architecture
+----------------------------------------------------
+
+Use Clean Architecture.
+
+Frontend
+
+lib/
+ core/
+ features/
+ shared/
+ widgets/
+ services/
+ theme/
+ localization/
+
+Backend
+
+app/
+ api/
+ models/
+ schemas/
+ repositories/
+ services/
+ core/
+ plugins/
+ workers/
+
+Everything must be modular.
+
+No spaghetti code.
+
+Every feature should be independently maintainable.
+
+----------------------------------------------------
+Plugin SDK (Very Important)
+----------------------------------------------------
+
+The platform must include a Plugin SDK.
+
+Third-party developers should be able to create plugins without modifying the core codebase.
+
+Example plugins:
+
+Huawei
+
+Cisco
+
+Nokia
+
+Ericsson
+
+Ubiquiti
+
+MikroTik
+
+Cambium
+
+Custom Engineering Tools
+
+Each plugin must have:
+
+metadata
+
+permissions
+
+API access
+
+UI integration
+
+versioning
+
+documentation
+
+----------------------------------------------------
+GIS Engine
+----------------------------------------------------
+
+Implement a complete GIS module.
+
+Features:
+
+OpenStreetMap
+
+MapLibre
+
+Satellite layers
+
+Terrain
+
+Elevation
+
+Layer Manager
+
+Drawing Tools
+
+Markers
+
+Lines
+
+Polygons
+
+Measurement Tools
+
+GeoJSON
+
+KML
+
+GPX
+
+Shapefile Import
+
+Shapefile Export
+
+Coordinate Systems
+
+Search
+
+Bookmarks
+
+Offline Maps
+
+----------------------------------------------------
+RF Planning Module
+----------------------------------------------------
+
+Implement professional RF engineering tools.
+
+Include:
+
+Link Budget
+
+Free Space Path Loss
+
+Fresnel Zone
+
+Line Of Sight
+
+Coverage Radius
+
+Coverage Heatmap
+
+Interference Estimation
+
+Antenna Patterns
+
+Signal Strength
+
+Rain Fade
+
+Microwave Planning
+
+Availability Calculation
+
+Every calculator must include:
+
+Engineering explanation
+
+Formula
+
+References
+
+Validation
+
+Step-by-step calculations
+
+Charts
+
+Export
+
+----------------------------------------------------
+Fiber Planning Module
+----------------------------------------------------
+
+Create a professional FTTH planner.
+
+Include:
+
+Fiber Routes
+
+Cable Design
+
+OLT Planning
+
+Splitter Planning
+
+Patch Panels
+
+Splice Management
+
+Fiber Loss
+
+Power Budget
+
+Rack Design
+
+Cable Database
+
+BOM Generator
+
+----------------------------------------------------
+Tower Management
+----------------------------------------------------
+
+Tower database
+
+Tower location
+
+GPS
+
+Elevation
+
+Equipment
+
+Photos
+
+Documents
+
+Maintenance
+
+History
+
+----------------------------------------------------
+Reports
+----------------------------------------------------
+
+Generate professional reports.
+
+PDF
+
+Excel
+
+CSV
+
+Charts
+
+Statistics
+
+Engineering summaries
+
+----------------------------------------------------
+AI Assistant
+----------------------------------------------------
+
+Create an AI assistant module.
+
+Capabilities:
+
+Explain RF concepts
+
+Analyze calculations
+
+Suggest improvements
+
+Review network designs
+
+Generate engineering reports
+
+Answer telecommunications questions
+
+----------------------------------------------------
+Collaboration
+----------------------------------------------------
+
+Projects
+
+Teams
+
+Roles
+
+Permissions
+
+Comments
+
+Activity Timeline
+
+Version History
+
+----------------------------------------------------
+Developer Experience
+----------------------------------------------------
+
+Include:
+
+REST API
+
+Swagger
+
+OpenAPI
+
+Plugin SDK Documentation
+
+Architecture Documentation
+
+Developer Guide
+
+Contribution Guide
+
+API Examples
+
+----------------------------------------------------
+Testing
+----------------------------------------------------
+
+Frontend:
+
+Widget Tests
+
+Unit Tests
+
+Integration Tests
+
+Backend:
+
+Unit Tests
+
+API Tests
+
+Integration Tests
+
+Target high test coverage.
+
+----------------------------------------------------
+Documentation
+----------------------------------------------------
+
+Generate:
+
+README.md
+
+ROADMAP.md
+
+CONTRIBUTING.md
+
+ARCHITECTURE.md
+
+API.md
+
+PLUGIN_SDK.md
+
+CHANGELOG.md
+
+CODE_OF_CONDUCT.md
+
+SECURITY.md
+
+LICENSE (MIT)
+
+Everything must be fully documented.
+
+----------------------------------------------------
+CI/CD
+----------------------------------------------------
+
+GitHub Actions should automatically:
+
+Run tests
+
+Check formatting
+
+Run lint
+
+Build backend
+
+Build frontend
+
+Verify Docker images
+
+----------------------------------------------------
+UI/UX
+----------------------------------------------------
+
+Modern engineering dashboard.
+
+Professional dark mode.
+
+Responsive layouts.
+
+Interactive maps.
+
+Charts.
+
+Engineering-focused design.
+
+----------------------------------------------------
+Performance
+----------------------------------------------------
+
+Support projects containing:
+
+100,000+ GIS objects
+
+Large engineering datasets
+
+Efficient caching
+
+Background processing
+
+Lazy loading
+
+----------------------------------------------------
+Code Quality
+----------------------------------------------------
+
+Use best practices.
+
+No placeholder code.
+
+No TODOs.
+
+No fake implementations.
+
+Everything should be production-ready.
+
+----------------------------------------------------
+Development Strategy
+----------------------------------------------------
+
+Build the project incrementally.
+
+Phase 1:
+Architecture
+Folder Structure
+Database Design
+
+Phase 2:
+Authentication
+
+Phase 3:
+GIS Engine
+
+Phase 4:
+RF Module
+
+Phase 5:
+Fiber Module
+
+Phase 6:
+Tower Module
+
+Phase 7:
+Reports
+
+Phase 8:
+Plugin SDK
+
+Phase 9:
+AI Assistant
+
+Phase 10:
+Documentation
+
+Phase 11:
+Testing
+
+Phase 12:
+CI/CD
+
+Do NOT skip any phase.
+
+Finish one phase completely before starting the next.
+
+Always explain architectural decisions before writing code.
+
+Maintain production quality throughout the project.
+
+Treat this as an open-source flagship project intended to become the standard platform for telecommunications GIS planning.
+
+----------------------------------------------------
+Advanced GIS Compatibility
+----------------------------------------------------
+
+The platform must be fully compatible with industry-standard GIS software.
+
+Support importing:
+
+• QGIS Projects (.qgz)
+• GeoPackage (.gpkg)
+• GeoJSON
+• Shapefile
+• KML
+• KMZ
+• GPX
+• CSV Coordinates
+• DXF
+• DWG (future support)
+
+Support exporting:
+
+• QGIS Project
+• GeoPackage
+• GeoJSON
+• Shapefile
+• KML
+• KMZ
+• GPX
+• PDF Maps
+• CAD-ready exports
+
+Implement CRS transformation.
+
+Support:
+
+EPSG:4326
+
+EPSG:3857
+
+UTM
+
+Custom CRS
+
+----------------------------------------------------
+Terrain & Elevation Analysis
+----------------------------------------------------
+
+Implement terrain analysis.
+
+Include:
+
+Digital Elevation Model (DEM)
+
+Slope Analysis
+
+Terrain Profile
+
+Line of Sight
+
+Earth Curvature
+
+Fresnel Clearance
+
+Height Difference
+
+Elevation Heatmap
+
+Terrain Cross Section
+
+----------------------------------------------------
+Satellite Imagery
+----------------------------------------------------
+
+Support multiple map providers.
+
+OpenStreetMap
+
+MapLibre
+
+OpenTopoMap
+
+Satellite Layers
+
+Terrain Layers
+
+Weather Layers
+
+Custom XYZ Tiles
+
+WMTS
+
+WMS
+
+----------------------------------------------------
+Network Asset Management
+----------------------------------------------------
+
+Create a professional asset management system.
+
+Manage:
+
+Towers
+
+Antennas
+
+Radios
+
+OLT
+
+ONU
+
+Splitters
+
+Fiber Cables
+
+Patch Panels
+
+Routers
+
+Switches
+
+Power Equipment
+
+UPS
+
+Batteries
+
+Generators
+
+Each asset includes:
+
+Photos
+
+GPS
+
+Maintenance
+
+Warranty
+
+Serial Number
+
+Vendor
+
+QR Code
+
+Barcode
+
+History
+
+----------------------------------------------------
+Network Topology
+----------------------------------------------------
+
+Automatically generate network topology diagrams.
+
+Visualize:
+
+Fiber connections
+
+Microwave links
+
+Wireless links
+
+Dependencies
+
+Failures
+
+Redundancy
+
+----------------------------------------------------
+Digital Twin
+----------------------------------------------------
+
+Implement Digital Twin support.
+
+Represent physical telecom infrastructure digitally.
+
+Allow real-time monitoring.
+
+Future integration with IoT devices.
+
+----------------------------------------------------
+Drone Survey
+----------------------------------------------------
+
+Future-ready drone integration.
+
+Import drone imagery.
+
+Photogrammetry support.
+
+Orthophoto support.
+
+Tower inspection.
+
+----------------------------------------------------
+Offline Mode
+----------------------------------------------------
+
+Full offline capability.
+
+Offline maps.
+
+Offline calculations.
+
+Offline reports.
+
+Synchronization when online.
+
+----------------------------------------------------
+Telemetry
+----------------------------------------------------
+
+Real-time monitoring.
+
+SNMP
+
+Syslog
+
+Telemetry API
+
+Device status
+
+Network alarms
+
+Performance metrics
+
+----------------------------------------------------
+Weather Integration
+----------------------------------------------------
+
+Integrate weather information.
+
+Rain Fade estimation.
+
+Wind speed.
+
+Temperature.
+
+Humidity.
+
+Lightning alerts.
+
+Useful for microwave planning.
+
+----------------------------------------------------
+Telecommunications Standards
+----------------------------------------------------
+
+Follow international standards.
+
+ITU
+
+IEEE
+
+ETSI
+
+3GPP
+
+TIA
+
+IEC
+
+Document references for every engineering calculation.
+
+----------------------------------------------------
+Education Mode
+----------------------------------------------------
+
+Every engineering calculation must include:
+
+Theory
+
+Formula
+
+Engineering explanation
+
+Interactive diagrams
+
+References
+
+Examples
+
+Common mistakes
+
+Best practices
+
+This makes the platform valuable for universities.
+
+----------------------------------------------------
+Simulation Mode
+----------------------------------------------------
+
+Allow engineers to simulate network changes before deployment.
+
+Coverage simulation.
+
+Capacity simulation.
+
+Failure simulation.
+
+Fiber failure.
+
+Tower outage.
+
+Redundancy analysis.
+
+----------------------------------------------------
+Marketplace
+----------------------------------------------------
+
+Plugin Marketplace.
+
+Theme Marketplace.
+
+Engineering Calculator Marketplace.
+
+Import modules from GitHub.
+
+Automatic updates.
+
+----------------------------------------------------
+Open SDK
+----------------------------------------------------
+
+Provide SDKs for:
+
+Flutter
+
+Python
+
+JavaScript
+
+Go
+
+Java
+
+Allow developers to integrate OTGP into their own software.
+
+----------------------------------------------------
+Enterprise Ready
+----------------------------------------------------
+
+Multi-tenancy
+
+Organizations
+
+Teams
+
+Role Based Access Control (RBAC)
+
+Audit Logs
+
+SSO
+
+LDAP
+
+OAuth
+
+High Availability
+
+Horizontal Scaling
+
+----------------------------------------------------
+Future AI Roadmap
+----------------------------------------------------
+
+AI-assisted RF planning
+
+AI-assisted Fiber routing
+
+Automatic tower placement suggestions
+
+Coverage optimization
+
+Automatic documentation generation
+
+Engineering report generation
+
+Natural language GIS search
+
+Engineering chatbot
+
+Design review assistant
+
+----------------------------------------------------
+Ultimate Goal
+----------------------------------------------------
+
+Build the world's most comprehensive open-source telecommunications GIS platform, capable of replacing fragmented engineering workflows with a modern, extensible, plugin-driven ecosystem that serves engineers, researchers, universities, ISPs, and telecom operators worldwide.

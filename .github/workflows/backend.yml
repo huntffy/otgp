@@ -1,0 +1,104 @@
+name: backend
+
+# No step interpolates attacker-controlled event data (issue titles, PR bodies, branch
+# names) into a `run:` block. The only expression used is `github.ref`, in a concurrency
+# group, where it is never passed to a shell.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: backend-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  POSTGRES_DB: otgp
+  POSTGRES_USER: otgp
+  POSTGRES_PASSWORD: ci_owner_pw
+  APP_DB_USER: otgp_app
+  APP_DB_PASSWORD: ci_app_pw
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_DB: otgp
+          POSTGRES_USER: otgp
+          POSTGRES_PASSWORD: ci_owner_pw
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U otgp -d otgp"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    env:
+      PGHOST: localhost
+      PGPORT: "5432"
+      PGPASSWORD: ci_owner_pw
+      OTGP_DATABASE_URL: postgresql+psycopg://otgp_app:ci_app_pw@localhost:5432/otgp
+      OTGP_MIGRATION_DATABASE_URL: postgresql+psycopg://otgp:ci_owner_pw@localhost:5432/otgp
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        working-directory: backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      # A service container does not run /docker-entrypoint-initdb.d, so the same scripts
+      # Compose uses are applied here explicitly. This keeps CI and local development on
+      # one code path rather than two that quietly drift apart.
+      - name: Bootstrap extensions and the unprivileged application role
+        run: |
+          psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v ON_ERROR_STOP=1 \
+            -f deploy/postgres/init/00-extensions.sql
+          bash deploy/postgres/init/01-app-role.sh
+
+      - name: Lint
+        working-directory: backend
+        run: |
+          ruff check .
+          ruff format --check .
+
+      - name: Migrate
+        working-directory: backend
+        run: alembic upgrade head
+
+      - name: Assert the migration matches the models
+        working-directory: backend
+        run: alembic check
+
+      - name: Assert the migration is reversible
+        working-directory: backend
+        run: |
+          alembic downgrade base
+          alembic upgrade head
+
+      - name: Test
+        working-directory: backend
+        run: pytest -q
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate the compose stack
+        run: |
+          cp .env.example .env
+          docker compose config --quiet
