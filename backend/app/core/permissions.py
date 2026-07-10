@@ -81,7 +81,37 @@ def resolve_effective_permissions(
       * Multiple grants union together. There is no deny-list and no precedence order;
         holding two roles means holding the union of their permissions.
     """
-    raise NotImplementedError
+    # Deactivation is checked before anything else, including the admin bypass. A
+    # disabled account must lose authority the instant the flag flips, not at its next
+    # login — otherwise revoking a compromised administrator does nothing until their
+    # token expires.
+    if not principal.is_active:
+        return frozenset()
+
+    # The escape hatch that guarantees a tenant can always repair its own role
+    # configuration. Scoped to the principal's own tenant by construction: RLS has
+    # already discarded every other tenant's rows before this function is reached.
+    if principal.is_tenant_admin:
+        return ALL_PERMISSIONS
+
+    granted: set[str] = set()
+    for role_grant in principal.grants:
+        if role_grant.project_id is None:
+            # Tenant-wide: applies to every project, and to tenant-level operations.
+            granted |= role_grant.permission_codes
+        elif project_id is not None and role_grant.project_id == project_id:
+            # Project-scoped: applies only to its own project.
+            #
+            # The `project_id is not None` guard is what stops a per-project Engineer
+            # from creating new projects. Without it, a tenant-level question — asked
+            # with project_id=None — would match every project-scoped grant the user
+            # holds, silently promoting them tenant-wide.
+            granted |= role_grant.permission_codes
+
+    # Union, with no deny-list and no precedence. Deny rules read as safer than they
+    # are: once two roles can contradict each other, the effective permission set
+    # depends on evaluation order, and no reviewer can predict it from the role names.
+    return frozenset(granted)
 
 
 ALL_PERMISSIONS: frozenset[str] = frozenset(
